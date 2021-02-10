@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const port = 4000 || process.env.PORT
+const port =   process.env.PORT || 4000
 
 app.get('/',(req, res)=>{
     res.send("Welcome to meme-stream backend ...")
