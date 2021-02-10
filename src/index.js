@@ -28,7 +28,11 @@ app.post('/memes',(req, res)=>{
     mongodb.addMemeFunction(data)
     res.send("Set successfull")
 })
-
+app.get('/memes/:id', async (req, res) =>{
+    var meme = await mongodb.getMemesByID( req.params.id)
+    //console.log(meme,req.params.id)
+    res.send(meme)
+})
 
 app.listen( port , ()=>{
     console.log(`App started at ` + port)

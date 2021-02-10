@@ -36,8 +36,20 @@ var getMemeFunction = async function(){
     return memes
 }
 
+// ***** Function for getting memes by ID *****
+var getMemesByID = async function(id){
+    var memes
+    await mongoConnect().then(async client =>{
+        const db= client.db(databaseName)
+        memes = await db.collection('memes').findOne({_id : ObjectId(id)})
+        client.close()
+    }).catch(err => console.log(err))
+    return memes
+}
+
 module.exports = {
     mongoConnect : mongoConnect,
     addMemeFunction : addMemeFunction,
-    getMemeFunction : getMemeFunction
+    getMemeFunction : getMemeFunction,
+    getMemesByID : getMemesByID
 }
