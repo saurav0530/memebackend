@@ -41,7 +41,7 @@ var getMemesByID = async function(id){
     var memes
     await mongoConnect().then(async client =>{
         const db= client.db(databaseName)
-        memes = await db.collection('memes').findOne({_id : ObjectId(id)})
+        memes = await db.collection('memes').find({_id : ObjectId(id)}).toArray()
         client.close()
     }).catch(err => console.log(err))
     return memes
