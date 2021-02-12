@@ -22,7 +22,7 @@ app.post('/memes',(req, res)=>{
     var data = {
         name: req.body.name,
         caption : req.body.caption,
-        date : new Date(Date.now()),
+        date : req.body.date,
         imgURL : req.body.imgURL
     }
     mongodb.addMemeFunction(data)
