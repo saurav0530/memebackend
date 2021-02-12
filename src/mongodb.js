@@ -47,9 +47,37 @@ var getMemesByID = async function(id){
     return memes
 }
 
+// ***** Function for deleting memes *****
+var deleteMemesByID = async function(id){
+    await mongoConnect().then(async client =>{
+        const db= client.db(databaseName)
+        await db.collection('memes').deleteOne({_id : ObjectId(id)})
+        client.close()
+    }).catch(err => console.log(err))
+    return 'Deleted successfully'
+}
+
+// ***** Function for updating memes *****
+var updateMemesByID = async function(id, data){
+    //console.log(data)
+    await mongoConnect().then(async client =>{
+        const db= client.db(databaseName)
+        await db.collection('memes').updateOne({_id : ObjectId(id)},{$set : {
+            caption: data.caption,
+            imgURL: data.imgURL,
+            date : data.date
+        }})
+        client.close()
+    }).catch(err => console.log(err))
+    return 'Updated successfully'
+}
+
+
 module.exports = {
     mongoConnect : mongoConnect,
     addMemeFunction : addMemeFunction,
     getMemeFunction : getMemeFunction,
-    getMemesByID : getMemesByID
+    getMemesByID : getMemesByID,
+    deleteMemesByID : deleteMemesByID,
+    updateMemesByID : updateMemesByID
 }

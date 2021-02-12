@@ -33,6 +33,22 @@ app.get('/memes/:id', async (req, res) =>{
     //console.log(meme,req.params.id)
     res.send(meme)
 })
+app.post('/memes/delete',async (req,res)=>{
+    //console.log(req.body)
+    var data = await mongodb.deleteMemesByID(req.body.id)
+    res.send(data)
+})
+app.post('/memes/edit',async (req,res)=>{
+    //console.log(req.body)
+    var incomingData = {
+        caption: req.body.caption,
+        imgURL: req.body.imgURL,
+        date : req.body.date
+    }
+    var data = await mongodb.updateMemesByID(req.body.id, incomingData)
+    res.send(data)
+})
+
 
 app.listen( port , ()=>{
     console.log(`App started at ` + port)
