@@ -34,7 +34,8 @@ app.get('/memes',async (req, res)=>{
             id : data[i]._id,
             name : data[i].name,
             url : data[i].url,
-            caption : data[i].caption
+            caption : data[i].caption,
+            date : data[i].date
         }
 
     data = recentMeme
@@ -72,7 +73,8 @@ app.get('/memes/:id', async (req, res) =>{
             id : data._id,
             name : data.name,
             url : data.url,
-            caption : data.caption
+            caption : data.caption,
+            date : data.date
         }
         res.status(200).send(data)
     }
